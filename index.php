@@ -5,64 +5,53 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #eee;
-            font-family: sans-serif;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            max-width: 400px;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 0.5rem;
-        }
-
-        form input,
-        form textarea,
-        form select {
-            width: 100%;
-        }
-    </style>
+    <title>Mailing tool</title>
+    <link rel="stylesheet" href="assets/css/default.css">
 </head>
 
 <body>
-    <form action="mail.php" method="POST">
-        <div>
-            <label for="">Od</label>
-            <select name="" id="">
-                <option value="">-- Wybierz nadawcę --</option>
-                <!-- <option value=""></option> -->
-                <!-- <option value=""></option> -->
-            </select>
-        </div>
-        <div>
-            <label for="recipient">Do</label>
-            <input type="text" name="recipient" id="recipient">
-        </div>
-        <div>
-            <label for="subject">Temat</label>
-            <input type="text" name="subject" id="subject">
-        </div>
-        <div>
-            <label for="content">Treść</label>
-            <textarea name="content" id="content"></textarea>
-        </div>
-        <input type="submit">
-    </form>
+    <div class="card">
+        <header>
+            <h1>Mailing tool</h1>
+        </header>
+        <form action="mail.php" method="POST" name="mail" autocomplete="off">
+            <!-- <div>
+                <label for="sender">Od</label>
+                <select name="sender" id="sender">
+                    <option selected disabled hidden>-- Wybierz nadawcę --</option>
+                </select>
+            </div> -->
+            <div>
+                <label for="recipient">Do</label>
+                <input type="text" name="recipient" id="recipient">
+            </div>
+            <div>
+                <label for="subject">Temat</label>
+                <input type="text" name="subject" id="subject">
+            </div>
+            <div>
+                <label for="body">Treść</label>
+                <textarea name="body" id="body"></textarea>
+            </div>
+            <input type="file" name="attachments[]" multiple>
+            <button type="submit">Wyślij</button>
+        </form>
+    </div>
+    <div class="popup__container">
+        <template id="popup">
+            <div class="popup">
+                <div class="popup__content">
+                    <img src="assets/img/check.png" alt="checkmark">
+                    <h4></h4>
+                    <ul>
+                        <li></li>
+                    </ul>
+                </div>
+                <hr>
+            </div>
+        </template>
+    </div>
+    <script src="assets/js/payloadHandler.js"></script>
 </body>
 
 </html>

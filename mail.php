@@ -1,22 +1,30 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-// require_once('lib/phpMailer/ManualLoader.php');
-// require_once('class/MailMan.php');
+require_once 'utils/Mailer.php';
+require_once 'utils/Mail.php';
 
-// $mx = new MailMan();
-// if (empty($mx)) die();
+$response = ['error' => null];
 
-// $mx->sendMail('account1', $mxSchema=null, 'test');
+function validateInput($data)
+{
+    if (!isset($data['recipient'], $data['subject'], $data['body']))
+        throw new Exception('Wszystkie pola są wymagane');
 
-require_once('class/MailHandler.php');
+    $recipient = $data['recipient'];
+    $subject = $data['subject'];
+    $body = $data['body'];
 
-$sender = isset($_POST['sender']) ? $_POST['sender'] : null;
-$recipient = isset($_POST['recipient']) ? $_POST['recipient'] : null;
-$subject = isset($_POST['subject']) ? $_POST['subject'] : null;
-$content = isset($_POST['content']) ? $_POST['content'] : null;
-if($_POST) {
-    $mailHandler = new MailHandler();
-    $mailHandler->sendMail($sender, $recipient, $subject, $content);
+    return new Mail('sender@example.com', $recipient, $subject, $body);
 }
+
+try {
+    $mail = validateInput($_POST);
+    $mailer = new Mailer(true);
+    $mailer->fromMail($mail);
+    // $mailer->send();
+} catch (Exception $e) {
+    $response['error'] = $e->getMessage();
+}
+
+header('Content-Type: application/json');
+echo json_encode($response);
