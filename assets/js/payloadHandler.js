@@ -13,8 +13,8 @@ form.onformdata = async e => {
 
     if (!res.ok) return;
 
-    const data = await res.text();
-    showPopup(data);
+    const data = await res.json();
+    showPopup(data.error);
 };
 
 const template = document.querySelector('template#popup');
@@ -35,7 +35,7 @@ const showPopup = error => {
         p.innerText = 'Udało się wyslać wiadomość';
         img.src = 'assets/img/checkmark.png';
     }
-    
+
     const timer = clone.querySelector('.timer');
     const total = 6 * 1000;
     let remaining = total;

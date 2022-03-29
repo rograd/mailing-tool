@@ -8,16 +8,16 @@ require_once 'utils/Mailer.php';
 $response = ['error' => null];
 
 $reqest = new RequestHandler($_POST);
-$upload = new UploadHandler($_FILES);
+// $upload = new UploadHandler($_FILES);
 
 try {
     $recipient = $reqest->validate('recipient');
     $subject = $reqest->validate('subject');
     $body = $reqest->validate('body');
-    $attachments = $upload->validate('attachments');
+    // $attachments = $upload->validate('attachments');
 
-    $mail = new Mail('sender@example.com', $recipient, $subject, $body);
     $mailer = new Mailer(true);
+    $mail = new Mail('sender@example.com', $recipient, $subject, $body);
     $mailer->fromMail($mail);
     $mailer->send();
 } catch (InputException $e) {

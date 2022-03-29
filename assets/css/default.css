@@ -6,35 +6,27 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100vh;
+}
+
 body {
   background-color: #f1f3fb;
   font-family: "Poppins", sans-serif;
-  margin: 0 auto;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
+  flex-direction: column;
+  margin: 10vh 20vw;
 }
 
 .card {
-  margin: 2rem auto;
-  display: flex;
-  flex-direction: column;
   background-color: #fff;
   border-radius: 10px;
-  box-shadow: 0 10px 20px 0 rgba(#999, 0.25);
-  padding: 1rem;
+  box-shadow: 0 10px 20px 0 #99999925;
+  padding: 1rem 1.5rem;
 }
 
-button[type="submit"] {
-  font: inherit;
-  font-size: 1.25rem;
-  padding: 1rem;
-  font-weight: 500;
-  background-color: #6658d3;
-  border-radius: 6px;
-  color: #fff;
-  border: 0;
+.card h1 {
+  margin-top: 0.5rem;
 }
 
 form {
@@ -42,67 +34,44 @@ form {
   flex-direction: column;
   align-items: stretch;
   gap: 0.5rem;
-  border-radius: 3px;
 }
 
-.popup * {
-  margin: 0;
-  padding: 0;
+form input:not([type="file"]),
+form div[role="textbox"],
+form textarea {
+  font-size: large;
+  border: none;
+  background-color: rgb(245, 245, 245);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
 }
 
-.popup__container {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
+.file-button {
+  padding: 0.75rem;
+  border: 2px dashed #6658d3;
+  border-radius: 4px;
 }
 
-.popup__content:is(:hover, :focus) {
-  background-color: rgb(178, 231, 178);
+.file-button:is(:hover, :focus) {
+  background-color: rgb(245, 245, 245);
   cursor: pointer;
 }
 
-.popup__content {
-  background-color: lightgreen;
-  padding: 0.5rem 1rem;
-  display: grid;
-  grid-template:
-    "img h4" auto
-    "img p" auto
-    / 25px auto;
-  gap: 0 1rem;
+input[type="file"] {
+  display: none;
+}
+
+form textarea {
+  resize: vertical;
+  font: inherit;
+}
+
+button[type="submit"] {
+  font-size: 1.25rem;
+  padding: 0.75rem;
+  font-weight: 500;
+  background-color: #6658d3;
+  border-radius: 6px;
   color: #fff;
-}
-
-.popup img {
-  grid-area: img;
-  max-width: 100%;
-  place-self: center;
-}
-
-.popup .timer {
-  --color: darkgreen;
-  margin: 0;
-  margin-top: -4px;
-  background-color: darkgreen;
-  height: 4px;
-}
-
-.popup h4 {
-  grid-area: h4;
-}
-
-.popup p {
-  grid-area: p;
-}
-
-.popup.error .popup__content {
-  background-color: #aa0000;
-}
-
-.popup.error .timer {
-  background-color: #d34848;
-  border-color: #aa0000;
+  border: none;
 }

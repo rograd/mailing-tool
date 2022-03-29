@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mailing tool</title>
     <link rel="stylesheet" href="assets/css/default.css">
+    <link rel="stylesheet" href="assets/css/popup.css">
 </head>
 
 <body>
@@ -15,25 +16,13 @@
             <h1>Mailing tool</h1>
         </header>
         <form action="mail.php" method="POST" name="mail" autocomplete="off">
-            <!-- <div>
-                <label for="sender">Od</label>
-                <select name="sender" id="sender">
-                    <option selected disabled hidden>-- Wybierz nadawcę --</option>
-                </select>
-            </div> -->
-            <div>
-                <label for="recipient">Do</label>
-                <input type="text" name="recipient" id="recipient">
-            </div>
-            <div>
-                <label for="subject">Temat</label>
-                <input type="text" name="subject" id="subject">
-            </div>
-            <div>
-                <label for="body">Treść</label>
-                <textarea name="body" id="body"></textarea>
-            </div>
-            <input type="file" name="attachments[]" multiple>
+            <input type="text" name="recipient" placeholder="Odbiorca">
+            <input type="text" name="subject" placeholder="Temat">
+            <!-- <div contenteditable name="body" role="textbox"></div> -->
+            <textarea name="body" placeholder="Treść"></textarea>
+            <label class="file-button">Dodaj pliki
+                <input type="file" name="attachments[]" multiple>
+            </label>
             <button type="submit">Wyślij</button>
         </form>
     </div>
