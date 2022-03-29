@@ -1,29 +1,29 @@
 <?php
 
-require_once 'utils/Mailer.php';
+require_once 'utils/RequestHandler.php';
+require_once 'utils/UploadHandler.php';
 require_once 'utils/Mail.php';
+require_once 'utils/Mailer.php';
 
 $response = ['error' => null];
 
-function validateInput($data)
-{
-    if (!isset($data['recipient'], $data['subject'], $data['body']))
-        throw new Exception('Wszystkie pola są wymagane');
-
-    $recipient = $data['recipient'];
-    $subject = $data['subject'];
-    $body = $data['body'];
-
-    return new Mail('sender@example.com', $recipient, $subject, $body);
-}
+$reqest = new RequestHandler($_POST);
+$upload = new UploadHandler($_FILES);
 
 try {
-    $mail = validateInput($_POST);
+    $recipient = $reqest->validate('recipient');
+    $subject = $reqest->validate('subject');
+    $body = $reqest->validate('body');
+    $attachments = $upload->validate('attachments');
+
+    $mail = new Mail('sender@example.com', $recipient, $subject, $body);
     $mailer = new Mailer(true);
     $mailer->fromMail($mail);
-    // $mailer->send();
-} catch (Exception $e) {
+    $mailer->send();
+} catch (InputException $e) {
     $response['error'] = $e->getMessage();
+} catch (Exception $e) {
+    $response['error'] = 'Bład wewnętrzny serwera';
 }
 
 header('Content-Type: application/json');

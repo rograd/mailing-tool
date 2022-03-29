@@ -10,16 +10,18 @@ require_once __DIR__ . '/../lib/phpmailer/src/SMTP.php';
 
 class Mailer extends PHPMailer
 {
-    const USERNAME = 'casimer.daugherty34@ethereal.email';
-    const PASSWORD = 'z24rdzFXz81dajch9b';
+    const HOST = 'smtp.ethereal.email';
+    const USER = 'casimer.daugherty34@ethereal.email';
+    const PASS = 'z24rdzFXz81dajch9b';
 
-    private function setConfiguration()
+    public function __construct(...$args)
     {
+        parent::__construct(...$args);
         $this->isSMTP();
-        $this->Host = 'smtp.ethereal.email';
+        $this->Host = self::HOST;
         $this->SMTPAuth = true;
-        $this->Username = self::USERNAME;
-        $this->Password = self::PASSWORD;
+        $this->Username = self::USER;
+        $this->Password = self::PASS;
         $this->SMTPSecure = 'tls';
         $this->Port = 587;
     }

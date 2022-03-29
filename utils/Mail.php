@@ -1,6 +1,6 @@
 <?php
 
-
+require_once __DIR__ . '/InputException.php';
 
 class Mail
 {
@@ -19,7 +19,7 @@ class Mail
     public function setRecipient(string $recipient): void
     {
         if (!($recipient && strpos($recipient, '@') !== false))
-            throw new Exception('Nieprawidłowy adres e-mail');
+            throw new InputException('Nieprawidłowy adres e-mail');
 
         $this->recipient = $recipient;
     }
@@ -27,7 +27,7 @@ class Mail
     public function setSubjcet(string $subject): void
     {
         if (!$subject)
-            throw new Exception('Tytuł nie może być pusty');
+            throw new InputException('Tytuł nie może być pusty');
 
         $this->subject = $subject;
     }
@@ -35,7 +35,7 @@ class Mail
     public function setBody(string $body): void
     {
         if (!$body)
-            throw new Exception('Zawartość nie może być pusta');
+            throw new InputException('Zawartość nie może być pusta');
 
         $this->body = $body;
     }

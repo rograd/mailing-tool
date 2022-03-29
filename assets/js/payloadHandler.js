@@ -13,17 +13,30 @@ form.onformdata = async e => {
 
     if (!res.ok) return;
 
-    const data = await res.json();
-    showPopup(data.error);
+    const data = await res.text();
+    showPopup(data);
 };
 
 const template = document.querySelector('template#popup');
 
-const showPopup = data => {
+const showPopup = error => {
     const clone = template.content.firstElementChild.cloneNode(true);
-    const [content, bar] = clone.children;
+    const img = clone.querySelector('img');
+    const p = clone.querySelector('p');
+    const h4 = clone.querySelector('h4');
+
+    if (error) {
+        h4.innerText = 'Klops';
+        p.innerText = error;
+        img.src = 'assets/img/failmark.png';
+        clone.classList.add('error');
+    } else {
+        h4.innerText = 'Sukces';
+        p.innerText = 'Udało się wyslać wiadomość';
+        img.src = 'assets/img/checkmark.png';
+    }
     
-    clone.querySelector('ul li').innerText = data;
+    const timer = clone.querySelector('.timer');
     const total = 6 * 1000;
     let remaining = total;
     const timeout = 10;
@@ -33,12 +46,8 @@ const showPopup = data => {
             clone.remove();
         }
         remaining -= timeout;
-        bar.style.width = `${remaining / total * 100}%`;
+        timer.style.width = `${remaining / total * 100}%`;
     }, timeout);
-
-    clone.addEventListener('click', e => {
-        console.log(e);
-    });
 
     document.querySelector('.popup__container').appendChild(clone);
 };
