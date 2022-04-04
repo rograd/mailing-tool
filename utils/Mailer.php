@@ -18,18 +18,22 @@ class Mailer extends PHPMailer
     {
         parent::__construct(...$args);
         $this->isSMTP();
-        $this->Host = self::HOST;
         $this->SMTPAuth = true;
-        $this->Username = self::USER;
-        $this->Password = self::PASS;
         $this->SMTPSecure = 'tls';
         $this->Port = 587;
+    }
+
+    public function login()
+    {
+        $this->Username = self::USER;
+        $this->Password = self::PASS;
+        $this->Host = self::HOST;
     }
 
     public function fromMail(Mail $mail)
     {
         $this->setFrom($mail->getSender(), 'Mailer');
-        $this->addAddress($mail->getrecipient());
+        $this->addAddress($mail->getRecipient());
         $this->Subject = $mail->getSubject();
         $this->Body = $mail->getBody();
 

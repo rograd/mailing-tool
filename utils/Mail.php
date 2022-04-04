@@ -1,14 +1,13 @@
 <?php
 
-require_once __DIR__ . '/InputException.php';
-
 class Mail
 {
     private string $sender, $recipient, $subject, $body;
     private array $attachments;
 
-    public function __construct($sender, $recipient, $subject, $body)
+    public function __construct(Response $response, string $sender, string $recipient, string $subject, string $body)
     {
+        $this->response = $response;
         $this->sender = $sender;
         $this->setRecipient($recipient);
         $this->setSubjcet($subject);
@@ -18,24 +17,30 @@ class Mail
 
     public function setRecipient(string $recipient): void
     {
-        if (!($recipient && strpos($recipient, '@') !== false))
-            throw new InputException('Nieprawidłowy adres e-mail');
+        if (!($recipient && strpos($recipient, '@') !== false)) {
+            $this->response->appendError('Nieprawidłowy adres e-mail');
+            return;
+        }
 
         $this->recipient = $recipient;
     }
 
     public function setSubjcet(string $subject): void
     {
-        if (!$subject)
-            throw new InputException('Tytuł nie może być pusty');
+        if (!$subject) {
+            $this->response->appendError('Tytuł nie może być pusty');
+            return;
+        }
 
         $this->subject = $subject;
     }
 
     public function setBody(string $body): void
     {
-        if (!$body)
-            throw new InputException('Zawartość nie może być pusta');
+        if (!$body) {
+            $this->response->appendError('Zawartość nie może być pusta');
+            return;
+        }
 
         $this->body = $body;
     }
@@ -45,7 +50,7 @@ class Mail
         return $this->sender;
     }
 
-    public function getrecipient(): string
+    public function getRecipient(): string
     {
         return $this->recipient;
     }
@@ -58,10 +63,5 @@ class Mail
     public function getbody(): string
     {
         return $this->body;
-    }
-
-    public function getAttachments(): array
-    {
-        return $this->attachments;
     }
 }

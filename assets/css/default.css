@@ -1,4 +1,4 @@
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 *,
 *::before,
@@ -15,7 +15,7 @@ body {
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
-  margin: 10vh 20vw;
+  margin: 10vh 30vw;
 }
 
 .card {
@@ -29,7 +29,8 @@ body {
   margin-top: 0.5rem;
 }
 
-form {
+form,
+.files {
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -37,7 +38,6 @@ form {
 }
 
 form input:not([type="file"]),
-form div[role="textbox"],
 form textarea {
   font-size: large;
   border: none;
@@ -46,24 +46,24 @@ form textarea {
   border-radius: 4px;
 }
 
-.file-button {
-  padding: 0.75rem;
-  border: 2px dashed #6658d3;
+.upload-button {
+  padding: 0.5rem;
   border-radius: 4px;
+  font-size: xx-large;
 }
 
-.file-button:is(:hover, :focus) {
-  background-color: rgb(245, 245, 245);
-  cursor: pointer;
-}
-
-input[type="file"] {
+.upload-button input {
   display: none;
 }
 
-form textarea {
-  resize: vertical;
-  font: inherit;
+.upload-button:is(:hover, :focus) {
+  background-color: rgb(245, 245, 245);
+  cursor: pointer;
+  outline: 2px dashed #6658d3;
+}
+
+form input[type="file"]::-webkit-file-upload-button {
+  display: none;
 }
 
 button[type="submit"] {
@@ -75,3 +75,14 @@ button[type="submit"] {
   color: #fff;
   border: none;
 }
+
+/* .file {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.file .remove:hover {
+  opacity: 0.7;
+  cursor: pointer;
+} */

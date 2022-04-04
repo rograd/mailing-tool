@@ -1,30 +1,37 @@
 <?php
-
-require_once 'utils/RequestHandler.php';
-require_once 'utils/UploadHandler.php';
+require_once 'utils/RequestData.php';
+// require_once 'utils/Response.php';
 require_once 'utils/Mail.php';
 require_once 'utils/Mailer.php';
 
-$response = ['error' => null];
+// $response = new Response();
 
-$reqest = new RequestHandler($_POST);
-// $upload = new UploadHandler($_FILES);
+$postData = new RequestData($_POST);
 
-try {
-    $recipient = $reqest->validate('recipient');
-    $subject = $reqest->validate('subject');
-    $body = $reqest->validate('body');
-    // $attachments = $upload->validate('attachments');
+// $hasFields = $postData->has(['sender', 'recipient', 'subject', 'body']);
 
-    $mailer = new Mailer(true);
-    $mail = new Mail('sender@example.com', $recipient, $subject, $body);
-    $mailer->fromMail($mail);
-    $mailer->send();
-} catch (InputException $e) {
-    $response['error'] = $e->getMessage();
-} catch (Exception $e) {
-    $response['error'] = 'Bład wewnętrzny serwera';
-}
 
-header('Content-Type: application/json');
-echo json_encode($response);
+// [
+//     'sender' => $sender,
+//     'recipient' => $recipient,
+//     'subject' => $subject,
+//     'body' => $body
+// ] = $postData;
+// $attachments = $filesData->attachments;
+
+// $mailer = new Mailer(true);
+// $mail = new Mail($response, 'sender@example.com', $recipient, $subject, $body);
+// $mailer->fromMail($mail);
+// // $mailer->send();
+
+// header('Content-Type: application/json');
+// echo json_encode($response);
+
+// $postData->all(['sender', 'recipient', 'subject', 'body']);
+    
+// public function all(array $keys): bool
+// {
+//     $values = array_map(fn($key) => $this->$key, $keys);
+
+//     return isset($values);
+// }
