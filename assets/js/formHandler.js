@@ -45,8 +45,7 @@ const handleFormData = async e => {
     const body = target.querySelector('#mail-body').innerText;
     formData.set('body', body);
 
-    const files = [...attachments.values()];
-    files.forEach(file => formData.append('attachments[]', file));
+    attachments.forEach(file => formData.append('attachments[]', file));
 
     const { action: url, method } = target;
     const res = await fetch(url, { method, body: formData });
