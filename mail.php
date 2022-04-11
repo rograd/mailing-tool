@@ -7,6 +7,8 @@ require_once 'utils/Mailer.php';
 // $response = new Response();
 
 $postData = new RequestData($_POST);
+print_r($_POST);
+print_r($_FILES);
 
 // $hasFields = $postData->has(['sender', 'recipient', 'subject', 'body']);
 

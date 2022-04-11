@@ -4,85 +4,43 @@
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-html {
-  min-height: 100vh;
+  margin: 0;
 }
 
 body {
   background-color: #f1f3fb;
   font-family: "Poppins", sans-serif;
-  display: flex;
-  flex-direction: column;
-  margin: 10vh 30vw;
 }
 
-.card {
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px 0 #99999925;
-  padding: 1rem 1.5rem;
-}
-
-.card h1 {
+header h1 {
   margin-top: 0.5rem;
 }
 
-form,
-.files {
+main {
+  margin: 10vh auto;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.145);
+  padding: 1rem 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 0.5rem;
+  gap: 1rem;
 }
 
-form input:not([type="file"]),
-form textarea {
-  font-size: large;
-  border: none;
-  background-color: rgb(245, 245, 245);
-  padding: 0.5rem 0.75rem;
-  border-radius: 4px;
-}
-
-.upload-button {
-  padding: 0.5rem;
-  border-radius: 4px;
-  font-size: xx-large;
-}
-
-.upload-button input {
-  display: none;
-}
-
-.upload-button:is(:hover, :focus) {
-  background-color: rgb(245, 245, 245);
-  cursor: pointer;
-  outline: 2px dashed #6658d3;
-}
-
-form input[type="file"]::-webkit-file-upload-button {
-  display: none;
-}
-
-button[type="submit"] {
-  font-size: 1.25rem;
-  padding: 0.75rem;
-  font-weight: 500;
-  background-color: #6658d3;
-  border-radius: 6px;
-  color: #fff;
-  border: none;
-}
-
-/* .file {
+footer {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 0.5rem;
 }
 
-.file .remove:hover {
-  opacity: 0.7;
-  cursor: pointer;
-} */
+@media screen and (max-width: 400px) {
+  header {
+    text-align: center;
+  }
+
+  footer {
+    justify-content: center;
+  }
+}

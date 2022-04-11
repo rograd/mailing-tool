@@ -1,0 +1,62 @@
+main form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+main form select,
+main form input:not([type="file"]),
+main form div[contenteditable] {
+  font-size: large;
+  border: none;
+  background-color: #f5f5f5;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+}
+
+main form div[contenteditable] {
+  min-height: 5rem;
+}
+
+main form select,
+main form ::placeholder,
+main form div[contenteditable]:empty::before {
+  color: #a9a9a9;
+}
+
+.attach-button {
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: x-large;
+}
+
+.attach-button input {
+  display: none;
+}
+
+.attach-button:is(:hover, :focus) {
+  background-color: #f5f5f5;
+  outline: 2px dashed #6658d3;
+}
+
+button[type="submit"] {
+  font-size: 1.25rem;
+  padding: 0.75rem;
+  font-weight: 500;
+  background-color: #6658d3;
+  border-radius: 6px;
+  color: #fff;
+  border: none;
+}
+
+.attach-button,
+button[type="submit"] {
+  cursor: pointer;
+}
+
+.attachments {
+  padding: 0.5rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
